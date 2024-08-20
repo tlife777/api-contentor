@@ -4,6 +4,8 @@ services:
     build: .
     ports:
       - "80:8000"
+    volumes:
+      - ./.env:/app/.env:ro
     # restart: unless-stopped
     # env_file:
     #   - .env
