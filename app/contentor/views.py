@@ -1,6 +1,8 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from contentor.models import SensorData
+from django.utils import timezone
+from datetime import timedelta
 
 # Create your views here.
 
@@ -37,5 +39,27 @@ def register_data(request):
             }
             return JsonResponse(response, status=500)
 
+    response = {"detail": f"Method \"{request.method}\" not allowed."}
+    return JsonResponse(response, status=405)
+
+@csrf_exempt
+def get_data(request):
+    if request.method=='GET':
+        range_timedelta = int(request.GET.get('timedelta', 1440))
+        result_date = timezone.now()-timedelta(minutes=range_timedelta)
+        recent_records = SensorData.objects.filter(created_at__gte=result_date)
+        response = {"data": []}
+        for record in recent_records:
+            data = {
+                "timestamp": record.created_at,
+                "bateria": record.bateria,
+                "latitude": record.latitude,
+                "longitude": record.longitude,
+                "volume": record.volume,
+            }
+            response['data'].append(data)
+
+        response['data'].reverse()
+        return JsonResponse(response, status=200)
     response = {"detail": f"Method \"{request.method}\" not allowed."}
     return JsonResponse(response, status=405)
