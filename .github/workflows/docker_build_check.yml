@@ -26,3 +26,6 @@ jobs:
 
     - name: Build the Docker image
       run: docker-compose build
+    
+    - name: Run the Docker image
+      run: docker-compose up
