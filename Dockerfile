@@ -12,7 +12,5 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy the project code
 COPY app/. /app/
 
-RUN python manage.py migrate
-
 # Command to run the Django server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
