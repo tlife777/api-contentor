@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from contentor.views import register_data
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/register_data', register_data),
 ]
