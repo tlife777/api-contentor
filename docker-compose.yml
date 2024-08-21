@@ -6,7 +6,7 @@ services:
       - "41932:8000"
     volumes:
       - ./.env:/app/.env:ro
-    # restart: unless-stopped
+    restart: unless-stopped
     # env_file:
     #   - .env
 
