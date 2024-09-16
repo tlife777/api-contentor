@@ -146,7 +146,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 if DEBUG:
-    print(DEBUG)
     STATICFILES_DIRS = [BASE_DIR / 'static']
 else:
     STATIC_ROOT = BASE_DIR / 'static'

@@ -10,8 +10,4 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy the project code
-COPY app/. /app/
-
-# Command to run the Django server
-RUN python manage.py collectstatic --noinput
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+COPY ./app /app
